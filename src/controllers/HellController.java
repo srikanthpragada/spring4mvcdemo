@@ -12,10 +12,7 @@ public class HellController {
 
 	 @RequestMapping(value="/hello")
 	 public String hello(Model model,
-			             @RequestParam(name="name", required=false) String name) {
-		 if ( name == null)
-			   name ="Srikanth";
-		 
+			             @RequestParam(name="name",defaultValue="Srikanth Pragada") String name) {
 		 model.addAttribute("name",name.toUpperCase());
 		 model.addAttribute("today", LocalDate.now().toString());
 		 return "hello"; // logical view name
