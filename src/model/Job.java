@@ -1,8 +1,13 @@
 package model;
 
+import javax.validation.constraints.Size;
+
 public class Job {
 
-	private String id,title;
+	@Size(min = 4, message="Minimum size must be 4")
+	private String id;
+	@Size(min = 6, message="Minimum size must be 6")
+	private String title;
 
 	
 	public Job() {
