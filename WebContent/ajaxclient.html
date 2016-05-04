@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Ajax Client</title>
+<script src="jquery-2.2.1.js"></script>
+<script>
+
+  function getTime() {
+	  $.get("now",{}, function(result) {
+		 $("#output").text(result); 
+	  });
+  }
+</script>
+</head>
+<body>
+
+	<h1>Ajax Client</h1>
+
+	<button onclick="getTime()">Get Time</button>
+	<p />
+
+	<h2 id="output"></h2>
+
+</body>
+</html>
