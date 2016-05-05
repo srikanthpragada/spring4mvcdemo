@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Book Client</title>
+<script src="jquery-2.2.1.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+         function GetBook() {
+        	 $.ajax({
+        		 url : "books/" + $("#bookId").val(),
+        		 success : 
+        			  function(result) {
+        		         alert(result.title)
+        		      },
+        		 error : 
+        			 function() {
+        			    alert("Book Not Found!");
+        		     }
+        	 });
+         }
+         
+         function AddBook() {
+        	 $.ajax({
+        		 url : "books/add",
+        		 contentType : "application/json",
+        		 type  : "post",
+        		 datatype : "json",
+        		 data: JSON.stringify({"title" : $("#title").val(), "price" : $("#price").val() }),
+        		 success : 
+        			  function(result) {
+        		         alert("Added Book Successfully!");
+        		      },
+        		 error : 
+        			 function() {
+        			    alert("Sorry! Could not add book!");
+        		     }
+        	 });
+         }
+         
+         
+         function DeleteBook() {
+        	 $.ajax({
+        		 url : "books/delete/" +  $("#bookId").val(),
+        		 type  : "delete",
+        		 success : 
+        			  function(result) {
+        		         alert("Deleted Book Successfully!");
+        		      },
+        		 error : 
+        			 function() {
+        			    alert("Sorry! Could not delete book!");
+        		     }
+        	 });
+         }
+         
+         function ListBooks() {
+        	 var titles = "";
+        	 $.getJSON("books/list", 
+        			 function(result) {
+        		          
+        		           $.each(result, function(idx,book) {
+        		        	     titles +=  book.title + "\n";
+        		           });
+        		           
+        		           alert(titles);
+        	          });
+         }
+      
+        </script>
+</head>
+<body>
+	<h1>Books Client</h1>
+	
+	<button onclick='ListBooks()'>List Books</button>
+		
+	<hr/>
+	
+    <p/>		
+	Book Id :
+	<input type="text" id="bookId" />
+	<button onclick='GetBook()'>Get Book</button>
+	<button onclick='DeleteBook()'>Delete Book</button>
+    <hr/>
+
+	<h3>Add Book</h3>
+	Title :
+	<input type="text" id="title" /> Price :
+	<input type="text" id="price" />
+	<p />
+	<button onclick='AddBook()'>Add Book</button>
+
+</body>
+</html>
